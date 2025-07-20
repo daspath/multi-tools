@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - Multi-Tools Hub</title>
+    <meta name="description" content="Free online QR code generator. Create QR codes for URLs, text, contact info, and more.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <!-- Tool Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="../index.html#imageTools">Image Tools</a></li>
+                        <li class="breadcrumb-item active">QR Code Generator</li>
+                    </ol>
+                </nav>
+                
+                <div class="tool-header text-center">
+                    <div class="tool-icon mx-auto mb-3">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h1 class="display-5 fw-bold">QR Code Generator</h1>
+                    <p class="lead text-muted">Create QR codes for URLs, text, contact information, and more</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Section - Top -->
+        <div class="ad-section-top text-center py-3 mb-4">
+            <div class="ad-placeholder bg-light border rounded p-3">
+                <p class="text-muted mb-0">Advertisement Space</p>
+            </div>
+        </div>
+
+        <!-- Tool Content -->
+        <div class="row">
+            <!-- Main Tool -->
+            <div class="col-lg-8">
+                <div class="card shadow-custom mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-cog me-2"></i>QR Code Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- QR Code Type Selection -->
+                        <div class="mb-3">
+                            <label class="form-label">QR Code Type:</label>
+                            <select class="form-select" id="qrType" onchange="changeQRType()">
+                                <option value="text">Text</option>
+                                <option value="url">URL</option>
+                                <option value="email">Email</option>
+                                <option value="phone">Phone Number</option>
+                                <option value="contact">Contact Information</option>
+                                <option value="wifi">WiFi Network</option>
+                                <option value="sms">SMS</option>
+                            </select>
+                        </div>
+
+                        <!-- Text Input -->
+                        <div class="mb-3" id="textInputSection">
+                            <label for="qrText" class="form-label">Enter your text:</label>
+                            <textarea class="form-control" id="qrText" rows="4" placeholder="Enter the text you want to encode in the QR code..."></textarea>
+                        </div>
+
+                        <!-- URL Input -->
+                        <div class="mb-3 d-none" id="urlInputSection">
+                            <label for="qrUrl" class="form-label">Enter URL:</label>
+                            <input type="url" class="form-control" id="qrUrl" placeholder="https://example.com">
+                        </div>
+
+                        <!-- Email Input -->
+                        <div class="mb-3 d-none" id="emailInputSection">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="qrEmail" class="form-label">Email Address:</label>
+                                    <input type="email" class="form-control" id="qrEmail" placeholder="example@email.com">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="qrSubject" class="form-label">Subject (optional):</label>
+                                    <input type="text" class="form-control" id="qrSubject" placeholder="Email subject">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phone Input -->
+                        <div class="mb-3 d-none" id="phoneInputSection">
+                            <label for="qrPhone" class="form-label">Phone Number:</label>
+                            <input type="tel" class="form-control" id="qrPhone" placeholder="+1234567890">
+                        </div>
+
+                        <!-- Contact Information Input -->
+                        <div class="mb-3 d-none" id="contactInputSection">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="qrName" class="form-label">Name:</label>
+                                    <input type="text" class="form-control" id="qrName" placeholder="John Doe">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="qrPhoneContact" class="form-label">Phone:</label>
+                                    <input type="tel" class="form-control" id="qrPhoneContact" placeholder="+1234567890">
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label for="qrEmailContact" class="form-label">Email:</label>
+                                    <input type="email" class="form-control" id="qrEmailContact" placeholder="john@example.com">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="qrWebsite" class="form-label">Website:</label>
+                                    <input type="url" class="form-control" id="qrWebsite" placeholder="https://example.com">
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <label for="qrAddress" class="form-label">Address:</label>
+                                    <textarea class="form-control" id="qrAddress" rows="2" placeholder="Enter address"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WiFi Input -->
+                        <div class="mb-3 d-none" id="wifiInputSection">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="qrSSID" class="form-label">Network Name (SSID):</label>
+                                    <input type="text" class="form-control" id="qrSSID" placeholder="MyWiFi">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="qrPassword" class="form-label">Password:</label>
+                                    <input type="password" class="form-control" id="qrPassword" placeholder="WiFi password">
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label for="qrEncryption" class="form-label">Encryption Type:</label>
+                                    <select class="form-select" id="qrEncryption">
+                                        <option value="WPA">WPA/WPA2/WPA3</option>
+                                        <option value="WEP">WEP</option>
+                                        <option value="nopass">No Password</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="qrHidden" class="form-label">Hidden Network:</label>
+                                    <select class="form-select" id="qrHidden">
+                                        <option value="false">No</option>
+                                        <option value="true">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SMS Input -->
+                        <div class="mb-3 d-none" id="smsInputSection">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="qrSmsPhone" class="form-label">Phone Number:</label>
+                                    <input type="tel" class="form-control" id="qrSmsPhone" placeholder="+1234567890">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="qrSmsMessage" class="form-label">Message:</label>
+                                    <input type="text" class="form-control" id="qrSmsMessage" placeholder="Hello!">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- QR Code Options -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="qrSize" class="form-label">QR Code Size:</label>
+                                <select class="form-select" id="qrSize">
+                                    <option value="128">128x128</option>
+                                    <option value="256" selected>256x256</option>
+                                    <option value="512">512x512</option>
+                                    <option value="1024">1024x1024</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="qrErrorLevel" class="form-label">Error Correction:</label>
+                                <select class="form-select" id="qrErrorLevel">
+                                    <option value="L">Low (7%)</option>
+                                    <option value="M" selected>Medium (15%)</option>
+                                    <option value="Q">Quartile (25%)</option>
+                                    <option value="H">High (30%)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-lg" onclick="generateQRCode()">
+                                <i class="fas fa-qrcode me-2"></i>Generate QR Code
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Sidebar -->
+            <div class="col-lg-4">
+                <div class="card shadow-custom mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-image me-2"></i>Generated QR Code</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <div id="qrCodeContainer" class="mb-3">
+                            <div class="placeholder-qr">
+                                <i class="fas fa-qrcode fa-5x text-muted"></i>
+                                <p class="text-muted mt-2">QR code will appear here</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-primary" onclick="downloadQRCode()" id="downloadBtn" disabled>
+                                <i class="fas fa-download me-2"></i>Download PNG
+                            </button>
+                            <button class="btn btn-outline-success" onclick="downloadQRCodeSVG()" id="downloadSvgBtn" disabled>
+                                <i class="fas fa-download me-2"></i>Download SVG
+                            </button>
+                            <button class="btn btn-outline-info" onclick="copyQRCode()" id="copyBtn" disabled>
+                                <i class="fas fa-copy me-2"></i>Copy to Clipboard
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ad Section - Sidebar -->
+                <div class="ad-section-sidebar mb-4">
+                    <div class="ad-placeholder bg-light border rounded p-3 text-center">
+                        <p class="text-muted mb-0">Sidebar Ad</p>
+                    </div>
+                </div>
+
+                <!-- Quick Templates -->
+                <div class="card shadow-custom">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="fas fa-lightning-bolt me-2"></i>Quick Templates</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="loadTemplate('website')">
+                                <i class="fas fa-globe me-1"></i>Website
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="loadTemplate('email')">
+                                <i class="fas fa-envelope me-1"></i>Email
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="loadTemplate('phone')">
+                                <i class="fas fa-phone me-1"></i>Phone
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="loadTemplate('wifi')">
+                                <i class="fas fa-wifi me-1"></i>WiFi
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="loadTemplate('contact')">
+                                <i class="fas fa-address-card me-1"></i>Contact
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Section - Bottom -->
+        <div class="ad-section-bottom text-center py-3 mt-4">
+            <div class="ad-placeholder bg-light border rounded p-3">
+                <p class="text-muted mb-0">Advertisement Space</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/qr-code-generator.js"></script>
+</body>
+</html> 
